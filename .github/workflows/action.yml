@@ -25,7 +25,7 @@ jobs:
         cd ../..
         zip -r deploy.zip packages/frontend/.next packages/backend/dist
     - name: Deploy to Elastic Beanstalk
-      uses: AWS/actions/upload-to-aws-elastic-beanstalk@v1
+      uses: einaregilsson/beanstalk-deploy@v14
       with:
         access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
