@@ -35,5 +35,5 @@ jobs:
           application_name: testing-beanstalk
           environment_name: Testingbeanstalk-env
           version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
-          region: us-east-2
+          region: us-west-2
           deployment_package: deploy.zip
