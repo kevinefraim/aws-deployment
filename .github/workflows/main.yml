@@ -1,30 +1,33 @@
-name: Deploy Monorepo to Elastic Beanstalk
+name: Test & Deploy
 on:
   push:
     branches:
       - master
 jobs:
-  deploy:
+  test-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Latest Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
 
-      - name: Build Monorepo
-        run: |
-          # Example build command for a Node.js monorepo
-          # Replace with the appropriate command for your specific project
-          cd ./packages/frontend
-          npm ci
-          npm run build
-          cd ../backend
-          npm ci
-          npm run build
-
+      # Zip Dockerfile for upload
       - name: Generate Deployment Package
-        run: zip -r deploy.zip app/packages/frontend/dist/* app/packages/backend/dist/* -x "**node_modules**"
+        run: zip -r deploy.zip * -x "**node_modules**"
+        
+      - name: Get timestamp
+        uses: gerred/actions/current-time@master
+        id: current-time
 
-      - name: Deploy to Elastic Beanstalk
+      - name: Run string replace
+        uses: frabert/replace-string-action@master
+        id: format-time
+        with:
+          pattern: '[:\.]+'
+          string: "${{ steps.current-time.outputs.time }}"
+          replace-with: '-'
+          flags: 'g'
+
+      - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -32,5 +35,5 @@ jobs:
           application_name: testing-beanstalk
           environment_name: Testingbeanstalk-env
           version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
-          region: us-east-2
+          region: us-west-2
           deployment_package: deploy.zip
