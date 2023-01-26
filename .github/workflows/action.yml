@@ -22,7 +22,7 @@ jobs:
         npm run build
     - name: Package Applications
       run: |
-        cd ../..
+        cd ../ && cd ../
         zip -r deploy.zip packages/frontend/.next packages/backend/dist
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v14
