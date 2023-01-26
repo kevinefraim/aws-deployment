@@ -9,10 +9,13 @@ jobs:
     steps:
       - name: Checkout Latest Repo
         uses: actions/checkout@master
+      
+      - name: Copy package.json to root
+        run: cp backend/package.json .
 
       # Zip Dockerfile for upload
       - name: Generate Deployment Package
-        run: zip -r deploy.zip * -x "**node_modules**" ".ebextensions/**"        
+        run: zip -r deploy.zip * -x "**packages/frontend/node_modules**" "**packages/backend/node_modules**" ".ebextensions/**"        
         
       - name: Get timestamp
         uses: gerred/actions/current-time@master
@@ -28,7 +31,7 @@ jobs:
           flags: 'g'
 
       - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v14
+        uses: kevinefraim/aws-deployment
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
