@@ -11,8 +11,8 @@ jobs:
         uses: actions/checkout@master
       
       - name: Copy package.json to root
-        run: cp packages/backend/package.json .
-        run: cp packages/frontend/package.json .
+        run: cp packages/backend/package.json . && cp packages/frontend/package.json .
+
 
       # Zip Dockerfile for upload
       - name: Generate Deployment Package
@@ -42,4 +42,4 @@ jobs:
           version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
           region: us-west-2
           deployment_package: deploy.zip
-          path/to/config: .github/main.yml
+          path/to/config: .github/workflows/main.yml
