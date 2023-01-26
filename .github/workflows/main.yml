@@ -14,7 +14,7 @@ jobs:
         run: |
           # Example build command for a Node.js monorepo
           # Replace with the appropriate command for your specific project
-          cd app/packages/frontend
+          cd /packages/frontend
           npm ci
           npm run build
           cd ../backend
