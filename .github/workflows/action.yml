@@ -32,7 +32,7 @@ jobs:
           flags: 'g'
 
       - name: Deploy to EB
-        uses: kevinefraim/aws-deployment@master
+        uses: kevinefraim/aws-deployment@latest
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -41,4 +41,4 @@ jobs:
           version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
           region: us-west-2
           deployment_package: deploy.zip
-          path/to/config: aws-deployment/.github/workflows/action.yml
+          config_file: aws-deployment/.github/workflows/action.yml
