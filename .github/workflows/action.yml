@@ -28,6 +28,7 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
         application_name: ebs-deploy
         environment_name: Ebddeploy-env
         package: deploy.zip
