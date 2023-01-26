@@ -1,0 +1,8 @@
+FROM node:12-alpine
+ARG NODE_ENV=production
+WORKDIR /app
+COPY . .
+RUN yarn install --silent
+RUN yarn build
+EXPOSE 3001
+CMD ["node", "dist/main"]
