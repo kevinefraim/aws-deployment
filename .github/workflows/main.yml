@@ -1,4 +1,3 @@
-```yaml
 name: Test & Deploy
 on:
   push:
@@ -38,4 +37,3 @@ jobs:
           version_label: "the-simple-engineer-deployment-${{ steps.format-time.outputs.replaced }}"
           region: us-east-2
           deployment_package: deploy.zip
-```
