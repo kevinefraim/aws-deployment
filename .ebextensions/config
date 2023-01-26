@@ -1,7 +1,5 @@
 option_settings:
   - namespace: "aws:elasticbeanstalk:container:nodejs"
     option_name: "NodeCommand"
-    value: "npm run build && npm run start:prod --prefix packages/backend"
-  - namespace: "aws:elasticbeanstalk:container:nodejs"
-    option_name: "NodeCommand"
-    value: "npm run build && npm run start --prefix packages/frontend"
+    value: "docker-compose up"
+
